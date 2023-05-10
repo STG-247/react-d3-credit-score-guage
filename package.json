@@ -1,0 +1,38 @@
+{
+  "name": "react-d3-credit-score-guage",
+  "version": "1.0.0",
+  "description": "Guage graph using d3 and ReactJs for visualizing Credit Scores.",
+  "scripts": {
+    "rollup": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "d3",
+    "credit-score"
+  ],
+  "author": "Shashwat Kaundinya",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.1",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/react": "^18.2.6",
+    "jest-environment-jsdom": "^29.5.0",
+    "react": "^18.2.0",
+    "rollup": "^3.21.6",
+    "rollup-plugin-dts": "^5.3.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts"
+}
