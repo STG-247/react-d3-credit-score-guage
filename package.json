@@ -1,7 +1,10 @@
 {
-  "name": "react-d3-credit-score-guage",
+  "name": "@STG-247/react-d3-credit-score-guage",
   "version": "1.0.0",
   "description": "Guage graph using d3 and ReactJs for visualizing Credit Scores.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/STG-247"
+  },
   "scripts": {
     "rollup": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
