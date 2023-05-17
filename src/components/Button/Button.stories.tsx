@@ -1,14 +1,18 @@
 import  React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentStory, ComponentMeta, Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta: Meta<typeof Button> =  {
   title: "CRIFComponentLibrary/Button",
   component: Button,
-} as ComponentMeta<typeof Button>;
+};
+export default meta;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+type Story = StoryObj<typeof Button>;
+export const Primary: Story = {
+  render: () => <Button label="Button" />,
+};
+
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const HelloWorld = Template.bind({});
