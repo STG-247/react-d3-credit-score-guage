@@ -24,6 +24,8 @@ interface ChartConfig {
   colour: string;             // call getColour() fn to get colour.
   radius: number;             // radius of the guage
   label: string;              // label of the guage
+  max_score: number;          // max score on the guage
+  min_score: number;          // min score on the guage          
   score: {
     value: Function;          // fuction to calculate the score from percentage
     selector: string;         // score element CSS selector id
@@ -123,7 +125,6 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
         foreground.transition()
           .duration(2000)
           .attrTween("d", arcTween(options.percentage * tau) as any);
-
         function arcTween(newAngle: number) {
           return function (d: any) {
             let interpolate = d3.interpolate(d.endAngle, newAngle);
@@ -131,7 +132,7 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
               d.endAngle = interpolate(t);
               let path = arc(d);
               let curScore = options.score.value(perc * t);
-              let score = curScore / 100 * 850;
+              let score = Math.round(curScore / 100 * options.max_score);
               scoreDiv.html('' + score);
               let cx = options.radius + Math.sin(d.endAngle) * 0.97 * options.radius;
               let cy = options.radius - Math.cos(d.endAngle) * 0.97 * options.radius;
@@ -154,6 +155,8 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
       colour: this.getColour(value),
       radius: 100,
       label: 'SCORE',
+      max_score: this.props.max_score,
+      min_score: this.props.min_score,
       score: {
         value: function (p: number) {
           return p * 100
