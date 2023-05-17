@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic");
+
+body {
+    background: #353353;
+    padding: 0;
+    height: 100vh;
+    min-height: 100vh;
+    font-family: "Rubik", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow:column;
+}
+#app{
+  height:100%;
+  display: flex;
+  align-items: center;
+}
+
+.dark .score-chart {
+	 background: #09132A;
+	 position: relative;
+   padding:30px;
+   margin: 25px auto;
+}
+
+.light .score-chart{
+  background: #fff;
+	 position: relative;
+   padding:30px;
+   margin: 25px auto;
+}
+ .score-chart p {
+	 text-align: center;
+	 font-size: 12px;
+	 z-index: 3;
+	 font-weight: 100;
+	 opacity: 0.8;
+	 margin: 0px;
+}
+ .score-chart p.gaugue-score-bottom {
+	 padding-top: 0px;
+}
+ .score-chart .score-chart-legend {
+	 background: transparent;
+	 vertical-align: middle;
+	 position: absolute;
+	 text-align: center;
+	 letter-spacing: 0.3em;
+}
+ .score-chart #gaugue-score-middle-0,   .score-chart #gaugue-score-middle-1{
+	 font-size: 45px;
+	 padding: 0;
+	 line-height: 1em;
+	 color: #26E79A;
+	 width: 100%;
+	 text-align: center;
+	 font-weight: 100;
+}
+
+.flex-center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-flow:column;
+}
+
+svg path{
+  opacity: 1 !important;
+  stroke-opacity: 1 !important;
+}
+
+svg path:first-child{
+  fill: rgb(249 249 249) !important;
+}
+svg path:nth-child(2), .card.light svg path:nth-child(3){
+  fill: rgb(241 241 241) !important;
+}
