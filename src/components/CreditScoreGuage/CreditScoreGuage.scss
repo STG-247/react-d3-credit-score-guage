@@ -11,11 +11,6 @@ body {
     justify-content: center;
     flex-flow:column;
 }
-#app{
-  height:100%;
-  display: flex;
-  align-items: center;
-}
 
 .dark .score-chart {
 	 background: #09132A;
@@ -48,7 +43,7 @@ body {
 	 text-align: center;
 	 letter-spacing: 0.3em;
 }
- .score-chart #gaugue-score-middle-0,   .score-chart #gaugue-score-middle-1{
+ .score-chart #gaugue-score-middle {
 	 font-size: 45px;
 	 padding: 0;
 	 line-height: 1em;

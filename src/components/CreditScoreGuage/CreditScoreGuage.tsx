@@ -5,8 +5,9 @@ import './CreditScoreGuage.scss';
 export interface IProps {
   id: number;
   score: number;
-  min_score: number|300;
-  max_score: number|900;
+  min_score: number | 300;
+  max_score: number | 900;
+  scale: number|1;
 }
 
 export interface IState {
@@ -43,7 +44,6 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: IProps) {
-    console.log(prevProps);
     d3.selectAll("svg > *").remove();
     this.drawGauge(this.props.score);
   }
@@ -52,7 +52,7 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
   drawGauge(value: number) {
 
     const ScoreChart = {
-      chart: function (options: ChartConfig) {
+      chart: (options: ChartConfig) => {
         const tau = 2 * Math.PI;
 
         let arc = d3.arc()
@@ -72,13 +72,13 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
           .attr("style", "width:" + (options.radius * 2 + 46) + "px; height:" + (options.radius * 2 + 46) + "px")
           ;
 
-        var scoreDiv = d3.select(options.score.selector),
-          svg = d3.select(options.selector),
-          width = 46 + options.radius * 2,
-          height = 46 + options.radius * 2,
-          g = svg.append("g")
-            .attr("transform",
-              "translate(" + ((width / 2)) + "," + ((height / 2)) + ")");
+        let scoreDiv = d3.select(options.score.selector);
+        let svg = d3.select(options.selector);
+        const width = 46 + options.radius * 2;
+        const height = 46 + options.radius * 2;
+        let g = svg.append("g")
+          .attr("transform",
+            "translate(" + ((width / 2)) + "," + ((height / 2)) + ")");
 
         svg.attr("width", width).attr("height", height);
 
@@ -122,17 +122,15 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
           .style("fill", options.colour)
           .attr("d", arc as any);
 
-        foreground.transition()
-          .duration(2000)
-          .attrTween("d", arcTween(options.percentage * tau) as any);
-        function arcTween(newAngle: number) {
-          return function (d: any) {
+
+        const arcTween = (newAngle: number) => {
+          return (d: any) => {
             let interpolate = d3.interpolate(d.endAngle, newAngle);
-            return function (t: any) {
+            return (t: any) => {
               d.endAngle = interpolate(t);
               let path = arc(d);
               let curScore = options.score.value(perc * t);
-              let score = Math.round(curScore / 100 * options.max_score);
+              let score = Math.ceil(curScore / 100 * options.max_score);
               scoreDiv.html('' + score);
               let cx = options.radius + Math.sin(d.endAngle) * 0.97 * options.radius;
               let cy = options.radius - Math.cos(d.endAngle) * 0.97 * options.radius;
@@ -141,13 +139,18 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
             };
           };
         }
+
+        foreground.transition()
+          .duration(3000)
+          .attrTween("d", arcTween(options.percentage * tau) as any);
+
       }
     };
 
     let perc = value / this.props.max_score;
 
     ScoreChart.chart({
-      parent: '#test',
+      parent: '#crifCreditScoreGuage',
       selector: '#svg-chart-' + this.props.id,
       percentage: perc,
       background: '#09132A',
@@ -158,10 +161,10 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
       max_score: this.props.max_score,
       min_score: this.props.min_score,
       score: {
-        value: function (p: number) {
-          return p * 100
+        value: (p: number) => {
+          return p * 100;
         },
-        selector: '#gaugue-score-middle-' + this.props.id
+        selector: '#gaugue-score-middle',
       }
     });
 
@@ -204,12 +207,13 @@ class CreditScoreGuage extends React.Component<IProps, IState> {
   }
 
   render() {
+    const scale = this.props.scale !== undefined ? {scale: this.props.scale} : {scale: 1.0};
     return (
-      <div>
-        <div className="score-chart flex-center" id="test">
+      <div style={scale}>
+        <div className="score-chart flex-center" id="crifCreditScoreGuage">
           <svg id={"svg-chart-" + this.props.id} />
           <div className="score-chart-legend">
-            <div id={"gaugue-score-middle-" + this.props.id} style={{ color: this.getColour(this.props.score) }}>0</div>
+            <div id={"gaugue-score-middle"} style={{ color: this.getColour(this.props.score) }}>{this.props.min_score}</div>
             <p className="gaugue-score-top">out of {this.props.max_score}</p>
           </div>
         </div>
