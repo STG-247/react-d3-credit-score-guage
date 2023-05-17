@@ -1,4 +1,31 @@
-do 
+## Description
+
+React + Typescript Credit Score Guage component using D3.
+
+## Install 
 ```sh
 $ npm install @STG-247/react-d3-credit-score-guage --save
+```
+
+## Usage
+```tsx
+import React from 'react'
+import { CreditScoreGuage } from '@STG-247/react-d3-credit-score-guage'
+
+const DateScore: React.FC = () => {
+   const config = {
+        id: 0,
+        score: 750,
+        min_score: 300,
+        max_score: 900,
+        scale: 0.7
+    }
+    return (
+        <div>
+            <CreditScoreGuage id={config.id} max_score={config.max_score} min_score={config.min_score} score={config.score} scale={config.scale}/>
+        </div>
+    );
+};
+
+export default DateScore;
 ```
