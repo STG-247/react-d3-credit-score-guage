@@ -1,0 +1,4 @@
+do 
+```sh
+$ npm install @STG-247/react-d3-credit-score-guage --save
+```

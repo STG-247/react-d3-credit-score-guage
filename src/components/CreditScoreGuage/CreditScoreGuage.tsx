@@ -5,8 +5,8 @@ import './CreditScoreGuage.scss';
 export interface IProps {
   id: number;
   score: number;
-  min_score: number|0;
-  max_score: number;
+  min_score: number|300;
+  max_score: number|900;
 }
 
 export interface IState {
